@@ -384,7 +384,8 @@ padding: 0px 20px;
 }
 
 .crypto-card .crypto-image {
-  width:35px;
+  width: 35px;
+  height: 35px;
 }
 
 .select-timeperiod {
