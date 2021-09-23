@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import millify from 'millify';
 
 import { useGetCryptosQuery } from 'services/crypto';
+import { Cryptocurrencies, News } from 'components';
 
 const { Title } = Typography;
 
@@ -52,6 +53,24 @@ const Home = () => {
           />
         </Col>
       </Row>
+      <div className="home-heading-container">
+        <Title className="home-title" level={2}>
+          Top 10 Cryptocurrencies in the world
+        </Title>
+        <Title className="show-more" level={3}>
+          <Link to="/cryptocurrencies">Show More</Link>
+        </Title>
+      </div>
+      <Cryptocurrencies simplified />
+      <div className="home-heading-container">
+        <Title className="home-title" level={2}>
+          Latest Crypto News
+        </Title>
+        <Title className="show-more" level={3}>
+          <Link to="/news">Show More</Link>
+        </Title>
+      </div>
+      <News simplified />
     </div>
   );
 };
