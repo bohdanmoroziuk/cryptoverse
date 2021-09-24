@@ -2,16 +2,22 @@ import { Typography, Row, Col, Statistic } from 'antd';
 import { Link } from 'react-router-dom';
 import millify from 'millify';
 
+import { useGetCryptoNewsQuery } from 'services/crypto-news';
 import { useGetCryptosQuery } from 'services/crypto';
-import { CryptocurrenciesList, News } from 'components';
+
+import { CryptocurrenciesList, NewsList } from 'components';
 
 const { Title } = Typography;
 
 const Home = () => {
-  const { data, isFetching } = useGetCryptosQuery({ count: 10 });
+  const { data: cryptos, isFetching: isFetching1 } = useGetCryptosQuery({ count: 10 });
 
-  const stats = data?.data?.stats;
-  const coins = data?.data?.coins;
+  const { data: cryptoNews, isFetching: isFetching2 } = useGetCryptoNewsQuery({ category: 'Cryptocurrency', count: 6 })
+
+  const stats = cryptos?.data?.stats;
+  const coins = cryptos?.data?.coins;
+
+  const news = cryptoNews?.value ?? [];
 
   return (
     <div className="page">
@@ -19,7 +25,7 @@ const Home = () => {
         Global Crypto Stats
       </Title>
 
-      {isFetching ? (
+      {isFetching1 ? (
         'Loading...'
       ) : (
         <Row>
@@ -65,7 +71,7 @@ const Home = () => {
         </Title>
       </div>
       
-      {isFetching ? (
+      {isFetching1 ? (
         'Loading...'
       ) : (
         <CryptocurrenciesList cryptos={coins} />
@@ -79,7 +85,12 @@ const Home = () => {
           <Link to="/news">Show More</Link>
         </Title>
       </div>
-      <News simplified />
+      
+      {isFetching2 ? (
+        'Loading...'
+      ) : (
+        <NewsList news={news} />
+      )}
     </div>
   );
 };
