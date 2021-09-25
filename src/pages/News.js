@@ -17,7 +17,7 @@ const News = () => {
     count: 18,
   });
 
-  const { data: cryptos, isFetching: isFetching2 } = useGetCryptosQuery({
+  const { data: cryptos } = useGetCryptosQuery({
     count: 100,
   });
 
