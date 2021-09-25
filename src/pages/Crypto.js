@@ -16,7 +16,7 @@ import {
   ThunderboltOutlined
 } from '@ant-design/icons';
 
-import { LineChart } from 'components';
+import { LineChart, Loader } from 'components';
 
 import { useGetCryptoQuery, useGetCryptoHistoryQuery } from 'services/crypto';
 
@@ -34,7 +34,7 @@ const Crypto = () => {
 
 
   if (isFetching1) {
-    return 'Loading...';
+    return <Loader />;
   }
 
   const crypto = data?.data?.coin;
@@ -88,7 +88,7 @@ const Crypto = () => {
       </Select>
 
       {isFetching2 ? (
-        'Loading...'
+        <Loader />
       ) : (
         <LineChart
           coinHistory={coinHistory}

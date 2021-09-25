@@ -5,7 +5,7 @@ import millify from 'millify';
 import { useGetCryptoNewsQuery } from 'services/crypto-news';
 import { useGetCryptosQuery } from 'services/crypto';
 
-import { CryptocurrenciesList, NewsList } from 'components';
+import { CryptocurrenciesList, NewsList, Loader } from 'components';
 
 const { Title } = Typography;
 
@@ -26,7 +26,7 @@ const Home = () => {
       </Title>
 
       {isFetching1 ? (
-        'Loading...'
+        <Loader />
       ) : (
         <Row>
           <Col span={12}>
@@ -72,7 +72,7 @@ const Home = () => {
       </div>
       
       {isFetching1 ? (
-        'Loading...'
+        <Loader />
       ) : (
         <CryptocurrenciesList cryptos={coins} />
       )}
@@ -87,7 +87,7 @@ const Home = () => {
       </div>
       
       {isFetching2 ? (
-        'Loading...'
+        <Loader />
       ) : (
         <NewsList news={news} />
       )}

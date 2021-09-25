@@ -4,7 +4,7 @@ import { Input } from 'antd';
 
 import { useGetCryptosQuery } from 'services/crypto';
 
-import { CryptocurrenciesList } from 'components';
+import { CryptocurrenciesList, Loader } from 'components';
 
 const Cryptocurrencies = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -35,7 +35,7 @@ const Cryptocurrencies = () => {
         />
       </div>
       {isFetching ? (
-        'Loading...'
+        <Loader />
       ) : (
         <CryptocurrenciesList cryptos={cryptos} />
       )}

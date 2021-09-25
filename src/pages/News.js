@@ -5,7 +5,7 @@ import { Row, Col, Select, Divider } from 'antd';
 import { useGetCryptoNewsQuery } from 'services/crypto-news';
 import { useGetCryptosQuery } from 'services/crypto';
 
-import { NewsList } from 'components';
+import { NewsList, Loader } from 'components';
 
 const { Option } = Select;
 
@@ -55,7 +55,7 @@ const News = () => {
       </Row>
       <Divider orientation="left" />
       {isFetching1 ? (
-        'Loading...'
+        <Loader />
       ) : (
         <NewsList news={news} />
       )}

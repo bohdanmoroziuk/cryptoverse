@@ -6,4 +6,6 @@ export { default as NewsList } from 'components/NewsList';
 export { default as CryptocurrencyCard } from 'components/CryptocurrencyCard';
 export { default as CryptocurrenciesList } from 'components/CryptocurrenciesList';
 
+export { default as Loader } from 'components/Loader';
+
 export { default as LineChart } from 'components/LineChart';
