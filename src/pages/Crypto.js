@@ -16,19 +16,24 @@ import {
   ThunderboltOutlined
 } from '@ant-design/icons';
 
-import { useGetCryptoQuery } from 'services/crypto';
+import { LineChart } from 'components';
+
+import { useGetCryptoQuery, useGetCryptoHistoryQuery } from 'services/crypto';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
 
 const Crypto = () => {
+  const [timePeriod, setTimePeriod] = useState('7d');
+  
   const { coinId } = useParams();
 
-  const { data, isFetching } = useGetCryptoQuery({ id: coinId });
+  const { data, isFetching: isFetching1 } = useGetCryptoQuery({ id: coinId });
 
-  const [timePeriod, setTimePeriod] = useState('7d');
+  const { data: coinHistory, isFetching: isFetching2 } = useGetCryptoHistoryQuery({ id: coinId, timePeriod, })
 
-  if (isFetching) {
+
+  if (isFetching1) {
     return 'Loading...';
   }
 
@@ -81,6 +86,17 @@ const Crypto = () => {
           </Option>
         ))}
       </Select>
+
+      {isFetching2 ? (
+        'Loading...'
+      ) : (
+        <LineChart
+          coinHistory={coinHistory}
+          currentPrice={millify(crypto.price)}
+          coinName={crypto.name}
+        />
+      )}
+
       <Col className="stats-container">
         <Col className="coin-value-statistics">
           <Col className="coin-value-statistics-heading">
