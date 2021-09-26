@@ -10,9 +10,7 @@ const { Text } = Typography;
 const { Panel } = Collapse;
 
 const Exchanges = () => {
-  const { data, isFetching } = useGetExchangesQuery();
-
-  const exchanges = data?.data?.exchanges;
+  const { data: exchanges, isFetching } = useGetExchangesQuery();
 
   if (isFetching) {
     return <Loader />

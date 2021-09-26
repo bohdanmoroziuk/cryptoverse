@@ -20,15 +20,22 @@ export const cryptoApi = createApi({
   endpoints: (builder) => ({
     getCryptos: builder.query({
       query: ({ count }) => createRequest(`/coins?limit=${count}`),
+      transformResponse: (response) => ({
+        coins: response?.data?.coins ?? [],
+        stats: response?.data?.stats ?? {},
+      }),
     }),
     getCrypto: builder.query({
       query: ({ id }) => createRequest(`/coin/${id}`),
+      transformResponse: (response) => response?.data?.coin ?? {},
     }),
     getCryptoHistory: builder.query({
       query: ({ id, timePeriod }) => createRequest(`/coin/${id}/history/${timePeriod}`),
+      transformResponse: (response) => response?.data?.history ?? [],
     }),
     getExchanges: builder.query({
       query: () => createRequest('/exchanges'),
+      transformResponse: (response) => response?.data?.exchanges ?? [],
     }),
   }),
 });

@@ -12,18 +12,16 @@ const { Option } = Select;
 const News = () => {
   const [category, setCategory] = useState('Cryptocurrency');
 
-  const { data: cryptoNews, isFetching: isFetching1 } = useGetCryptoNewsQuery({
+  const { data: news, isFetching: isFetching1 } = useGetCryptoNewsQuery({
     category,
     count: 18,
   });
 
-  const { data: cryptos } = useGetCryptosQuery({
+  const { data } = useGetCryptosQuery({
     count: 100,
   });
 
-  const news = cryptoNews?.value ?? [];
-
-  const currencies = cryptos?.data?.coins ?? [];
+  const currencies = data?.coins ?? [];
 
   return (
     <div className="page">

@@ -10,14 +10,9 @@ import { CryptocurrenciesList, NewsList, Loader } from 'components';
 const { Title } = Typography;
 
 const Home = () => {
-  const { data: cryptos, isFetching: isFetching1 } = useGetCryptosQuery({ count: 10 });
+  const { data, isFetching: isFetching1 } = useGetCryptosQuery({ count: 10 });
 
-  const { data: cryptoNews, isFetching: isFetching2 } = useGetCryptoNewsQuery({ category: 'Cryptocurrency', count: 6 })
-
-  const stats = cryptos?.data?.stats;
-  const coins = cryptos?.data?.coins;
-
-  const news = cryptoNews?.value ?? [];
+  const { data: news, isFetching: isFetching2 } = useGetCryptoNewsQuery({ category: 'Cryptocurrency', count: 6 })
 
   return (
     <div className="page">
@@ -32,31 +27,31 @@ const Home = () => {
           <Col span={12}>
             <Statistic 
               title="Total Cryptocurrencies"
-              value={stats.total}
+              value={data.stats.total}
             />
           </Col>
           <Col span={12}>
             <Statistic 
               title="Total Exchanges"
-              value={millify(stats.totalExchanges)}
+              value={millify(data.stats.totalExchanges)}
             />
           </Col>
           <Col span={12}>
             <Statistic 
               title="Total Market Cap"
-              value={millify(stats.totalMarketCap)}
+              value={millify(data.stats.totalMarketCap)}
             />
           </Col>
           <Col span={12}>
             <Statistic 
               title="Total 24h Volume"
-              value={millify(stats.total24hVolume)}
+              value={millify(data.stats.total24hVolume)}
             />
           </Col>
           <Col span={12}>
             <Statistic 
               title="Total Markets"
-              value={millify(stats.totalMarkets)}
+              value={millify(data.stats.totalMarkets)}
             />
           </Col>
         </Row>
@@ -74,7 +69,7 @@ const Home = () => {
       {isFetching1 ? (
         <Loader />
       ) : (
-        <CryptocurrenciesList cryptos={coins} />
+        <CryptocurrenciesList cryptos={data.coins} />
       )}
 
       <div className="home-heading-container">

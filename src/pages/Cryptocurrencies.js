@@ -18,7 +18,7 @@ const Cryptocurrencies = () => {
   };
 
   useEffect(() => {
-    const coins = data?.data?.coins?.filter((coin) => {
+    const coins = data?.coins?.filter((coin) => {
       return coin.name.toLowerCase().includes(searchTerm.toLowerCase());
     }) ?? [];
 

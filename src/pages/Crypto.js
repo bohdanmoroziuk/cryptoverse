@@ -30,7 +30,7 @@ const Crypto = () => {
   
   const { coinId } = useParams();
 
-  const { data, isFetching: isFetching1 } = useGetCryptoQuery({ id: coinId });
+  const { data: crypto, isFetching: isFetching1 } = useGetCryptoQuery({ id: coinId });
 
   const { data: coinHistory, isFetching: isFetching2 } = useGetCryptoHistoryQuery({ id: coinId, timePeriod, })
 
@@ -38,8 +38,6 @@ const Crypto = () => {
   if (isFetching1) {
     return <Loader />;
   }
-
-  const crypto = data?.data?.coin;
 
   const stats = [
     { title: 'Price to USD', value: `$ ${crypto.price && millify(crypto.price)}`, icon: <DollarCircleOutlined /> },

@@ -4,13 +4,11 @@ import { Row, Col, Typography } from 'antd';
 const { Title } = Typography;
 
 const LineChart = ({ coinHistory, currentPrice, coinName }) => {
-  const history = coinHistory?.data?.history ?? [];
-
-  const timestamps = history
+  const timestamps = coinHistory
     .map((item) => item.timestamp)
     .map((timestamp) => new Date(timestamp).toLocaleDateString())
 
-  const prices = history
+  const prices = coinHistory
     .map((item) => item.price);
 
   const data = {
