@@ -1,28 +1,12 @@
 import { Line } from 'react-chartjs-2';
 import { Row, Col, Typography } from 'antd';
 
+import { getChartData } from 'utils/crypto';
+
 const { Title } = Typography;
 
 const LineChart = ({ coinHistory, currentPrice, coinName }) => {
-  const timestamps = coinHistory
-    .map((item) => item.timestamp)
-    .map((timestamp) => new Date(timestamp).toLocaleDateString())
-
-  const prices = coinHistory
-    .map((item) => item.price);
-
-  const data = {
-    labels: timestamps,
-    datasets: [
-      {
-        label: 'Price in USD',
-        data: prices,
-        fill: false,
-        backgroundColor: '#0071bd',
-        borderColor: '#0071bd',
-      },
-    ],
-  };
+  const data = getChartData(coinHistory);
 
   const options = {
     scales: {
