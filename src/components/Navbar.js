@@ -10,20 +10,21 @@ import {
   MenuOutlined,
 } from '@ant-design/icons';
 
+import { getScreenSize, toggle } from 'utils/common';
 import { breakpoints } from 'config/constants';
 
 const Navbar = ({ title, icon }) => {
   const [isMenuActive, setIsMenuActive] = useState(false);
   
-  const [screenSize, setScreenSize] = useState(null);
+  const [screenSize, setScreenSize] = useState(getScreenSize);
 
   const toggleMenu = () => {
-    setIsMenuActive((isMenuActive) => !isMenuActive);
+    setIsMenuActive(toggle);
   };
 
   useEffect(() => {
     const handleResize = () => {
-      setScreenSize(window.innerWidth);
+      setScreenSize(getScreenSize());
     };
 
     window.addEventListener('resize', handleResize);
