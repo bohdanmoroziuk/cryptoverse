@@ -20,11 +20,13 @@ import { LineChart, Loader } from 'components';
 
 import { useGetCryptoQuery, useGetCryptoHistoryQuery } from 'services/crypto';
 
+import { timePeriods, defaultTimePeriod } from 'config/constants';
+
 const { Title, Text } = Typography;
 const { Option } = Select;
 
 const Crypto = () => {
-  const [timePeriod, setTimePeriod] = useState('7d');
+  const [timePeriod, setTimePeriod] = useState(defaultTimePeriod);
   
   const { coinId } = useParams();
 
@@ -38,8 +40,6 @@ const Crypto = () => {
   }
 
   const crypto = data?.data?.coin;
-
-  const timePeriods = ['3h', '24h', '7d', '30d', '1y', '3m', '3y', '5y'];
 
   const stats = [
     { title: 'Price to USD', value: `$ ${crypto.price && millify(crypto.price)}`, icon: <DollarCircleOutlined /> },

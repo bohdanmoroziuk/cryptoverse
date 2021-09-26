@@ -10,6 +10,8 @@ import {
   MenuOutlined,
 } from '@ant-design/icons';
 
+import { breakpoints } from 'config/constants';
+
 const Navbar = ({ title, icon }) => {
   const [isMenuActive, setIsMenuActive] = useState(false);
   
@@ -32,7 +34,7 @@ const Navbar = ({ title, icon }) => {
   }, []);
 
   useEffect(() => {
-    setIsMenuActive(screenSize >= 768);
+    setIsMenuActive(screenSize >= breakpoints.md);
   }, [screenSize]);
 
   return (
