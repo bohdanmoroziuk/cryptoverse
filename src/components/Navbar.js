@@ -13,13 +13,46 @@ import {
 import { getScreenSize, toggle } from 'utils/common';
 import { breakpoints } from 'config/constants';
 
+const menuItems = [
+  {
+    path: '/',
+    label: 'Home',
+    icon: <HomeOutlined />
+  },
+  {
+    path: '/cryptocurrencies',
+    label: 'Cryptocurrencies',
+    icon: <FundOutlined />
+  },
+  {
+    path: '/exchanges',
+    label: 'Exchanges',
+    icon: <MoneyCollectOutlined />
+  },
+  {
+    path: '/news',
+    label: 'News',
+    icon: <BulbOutlined />
+  },
+];
+
 const Navbar = ({ title, icon }) => {
   const [isMenuActive, setIsMenuActive] = useState(false);
   
   const [screenSize, setScreenSize] = useState(getScreenSize);
 
+  const hideMenu = () => {
+    setIsMenuActive(false);
+  };
+
   const toggleMenu = () => {
     setIsMenuActive(toggle);
+  };
+
+  const handleMenuItemClick = () => {
+    if (screenSize < breakpoints.md) {
+      hideMenu();
+    }
   };
 
   useEffect(() => {
@@ -54,18 +87,17 @@ const Navbar = ({ title, icon }) => {
       </div>
       {isMenuActive && (
         <Menu theme="dark">
-          <Menu.Item icon={<HomeOutlined />} key="home">
-            <Link to="/">Home</Link>
-          </Menu.Item>
-          <Menu.Item icon={<FundOutlined />} key="cryptocurrencies">
-            <Link to="/cryptocurrencies">Cryptocurrencies</Link>
-          </Menu.Item>
-          <Menu.Item icon={<MoneyCollectOutlined />} key="exchanges">
-            <Link to="/exchanges">Exchanges</Link>
-          </Menu.Item>
-          <Menu.Item icon={<BulbOutlined />} key="news">
-            <Link to="/news">News</Link>
-          </Menu.Item>
+          {menuItems.map((menuItem) => (
+            <Menu.Item
+              icon={menuItem.icon}
+              key={menuItem.label}
+              onClick={handleMenuItemClick}
+            >
+              <Link to={menuItem.path}>
+                {menuItem.label}
+              </Link>
+            </Menu.Item>
+          ))}
         </Menu>
       )}
     </div>
